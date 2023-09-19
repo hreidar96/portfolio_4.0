@@ -42,3 +42,17 @@ export const projectsData = [
     imageUrl: vedurstodinImg,
   },
 ] as const;
+
+export const skillsData = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Git",
+  "Tailwind",
+  "Sanity",
+  "Framer Motion",
+  "ThreeJS"
+] as const;
