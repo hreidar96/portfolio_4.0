@@ -56,3 +56,47 @@ export const skillsData = [
   "Framer Motion",
   "ThreeJS"
 ] as const;
+
+export const experiencesData = [
+  
+  {
+    title: "Nova Iceland - Stock Specialist",
+    location: "Reykjavik, Iceland",
+    description:
+      "Managed inventory stock through operations including receiving, tracking, ordering, picking, packing, shipping, reconciling, and analyzing to ensure timely and accurate product delivery",
+    icon: React.createElement(CgWorkAlt),
+    date: "2016 - 2020",
+  },
+  {
+    title: "Aalto University",
+    location: "Helsinki, Finland",
+    description:
+      "Went on an exchange with Erasmus+, had to live on my own in a new country and it was a fantastic experience",
+    icon: React.createElement(LuGraduationCap),
+    date: "2020 - 2021",
+  },
+  {
+    title: "Nova Iceland - Sales Specialist",
+    location: "Reykjavik, Iceland",
+    description:
+      "Prospected, qualified, demonstrated, negotiated, closed, followed up and analyzed sales data to increase revenue and maintain customer satisfaction",
+    icon: React.createElement(CgWorkAlt),
+    date: "2020 - 2021",
+  },
+  {
+    title: "University of Iceland",
+    location: "Reykjavik, Iceland",
+    description:
+      "Studied Business Administration with a major in Marketing. Expected graduation is summer of 24",
+    icon: React.createElement(LuGraduationCap),
+    date: "2019 - Present",
+  },
+  {
+    title: "Freelance Web Developer",
+    location: "Reykjavik, Iceland",
+    description:
+      "Worked on some projects for friends and family while continuing to develop my skills",
+    icon: React.createElement(CgWorkAlt),
+    date: "2020 - Present",
+  },
+] as const;
