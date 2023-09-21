@@ -17,10 +17,10 @@ type ContactFormEmailProps = {
   senderEmail: string;
 };
 
-export default function ContactFormEmail({
+export const ContactFormEmail: React.FC<Readonly<ContactFormEmailProps>> = ({
   message,
   senderEmail,
-}: ContactFormEmailProps) {
+}) => {
   return (
     <Html>
       <Head />
@@ -43,4 +43,6 @@ export default function ContactFormEmail({
       </Tailwind>
     </Html>
   );
-}
+};
+
+export default ContactFormEmail;
