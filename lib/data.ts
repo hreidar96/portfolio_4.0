@@ -87,9 +87,9 @@ export const experiencesData = [
     title: "University of Iceland",
     location: "Reykjavik, Iceland",
     description:
-      "Studied Business Administration with a major in Marketing. Expected graduation is summer of 24",
+      "Studied Business Administration with a major in Marketing. Graduated summer of '24. Wrote my thesis about the importance of customer-centric design approach in digital marketing communication",
     icon: React.createElement(LuGraduationCap),
-    date: "2019 - Present",
+    date: "2019 - 2024",
   },
   {
     title: "Freelance Web Developer",
