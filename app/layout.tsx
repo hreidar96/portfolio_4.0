@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import ThemeContextProvider from "@/context/theme-context";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -32,6 +33,7 @@ export default function RootLayout({
             <Header />
             {children}
             <Analytics />
+            <SpeedInsights />
             <Footer />
           </ActiveSectionContextProvider>
         </ThemeContextProvider>
