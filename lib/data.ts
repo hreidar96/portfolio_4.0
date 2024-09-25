@@ -1,10 +1,8 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
-import { FaReact } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import vedurstodinImg from "@/public/vedurstodinImg.png";
-import rmtdevImg from "@/public/rmtdev.png";
-import wordanalyticsImg from "@/public/wordanalytics.png";
+import portfolioImg from "@/public/portfolioImg.png";
 
 export const links = [
   {
@@ -41,6 +39,13 @@ export const projectsData = [
     tags: ["React", "Next.js", "Vercel", "Tailwind", "OpenAI"],
     imageUrl: vedurstodinImg,
   },
+  {
+    title: "Portfolio",
+    description: 
+      "Set up my portfolio and deployed it to Vercel. Complete with analytics and a form with Resend",
+    tags: ["React", "Next.js", "Vercel", "Tailwind", "Resend", "Framer Motion"],
+    imageUrl: portfolioImg,
+  }
 ] as const;
 
 export const skillsData = [
