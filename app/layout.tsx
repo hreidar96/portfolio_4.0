@@ -1,4 +1,3 @@
-import Analytics from "@vercel/analytics";
 import ThemeContextProvider from "@/context/theme-context";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -31,7 +30,6 @@ export default function RootLayout({
           <ActiveSectionContextProvider>
             <Header />
             {children}
-            <Analytics />
             <Footer />
           </ActiveSectionContextProvider>
         </ThemeContextProvider>

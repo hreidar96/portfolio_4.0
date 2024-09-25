@@ -60,12 +60,14 @@ export const skillsData = [
 export const experiencesData = [
   
   {
+    date: "2016 - 2020",
+    icon: React.createElement(CgWorkAlt),
     title: "Nova Iceland - Stock Specialist",
     location: "Reykjavik, Iceland",
     description:
       "Managed inventory stock through operations including receiving, tracking, ordering, picking, packing, shipping, reconciling, and analyzing to ensure timely and accurate product delivery",
-    icon: React.createElement(CgWorkAlt),
-    date: "2016 - 2020",
+    
+    
   },
   {
     title: "Aalto University",
