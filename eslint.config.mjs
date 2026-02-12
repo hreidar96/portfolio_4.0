@@ -1,11 +1,6 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
+import nextConfig from "eslint-config-next";
+import coreWebVitals from "eslint-config-next/core-web-vitals";
 
+const config = [...nextConfig, ...coreWebVitals];
 
-export default [
-  {files: ["**/*.{js,mjs,cjs,ts}"]},
-  {languageOptions: { globals: globals.browser }},
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-];
+export default config;
