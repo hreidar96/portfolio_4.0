@@ -1,26 +1,27 @@
 "use client";
 
-import { projectAssets } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiExternalLink, FiGithub, FiArrowUpRight } from "react-icons/fi";
-import { useLanguage } from "@/context/language-context";
+import { stegaClean } from "next-sanity";
+import { urlFor } from "@/sanity/lib/image";
+import type { ProjectItem, WorkSection } from "@/sanity/lib/types";
 
-type ProjectProps = (typeof projectAssets)[number] & {
-  title: string;
-  description: string;
+type ProjectProps = {
+  project: ProjectItem;
+  liveLinkLabel: WorkSection["liveLinkLabel"];
+  repositoryLinkLabel: WorkSection["repositoryLinkLabel"];
 };
 
 export default function Project({
-  title,
-  description,
-  tags,
-  imageUrl,
-  liveUrl,
-  githubUrl,
+  project,
+  liveLinkLabel,
+  repositoryLinkLabel,
 }: ProjectProps) {
-  const { t } = useLanguage();
+  const { title, description, image, technologies } = project;
+  const liveUrl = stegaClean(project.liveUrl);
+  const repositoryUrl = stegaClean(project.repositoryUrl);
 
   return (
     <motion.div
@@ -38,7 +39,7 @@ export default function Project({
             {description}
           </p>
           <ul className="mt-5 flex flex-wrap gap-2">
-            {tags.map((tag, index) => (
+            {technologies?.map((tag, index) => (
               <li
                 className="rounded-full border border-black/10 bg-black/[0.03] px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-gray-700 dark:border-white/10 dark:bg-white/10 dark:text-white/70"
                 key={index}
@@ -54,16 +55,16 @@ export default function Project({
                 target="_blank"
                 className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-950 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
               >
-                {t.work.live} <FiExternalLink />
+                {liveLinkLabel} <FiExternalLink />
               </Link>
             )}
-            {githubUrl && (
+            {repositoryUrl && (
               <Link
-                href={githubUrl}
+                href={repositoryUrl}
                 target="_blank"
                 className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition hover:bg-black/[0.04] dark:border-white/15 dark:hover:bg-white/10"
               >
-                {t.work.code} <FiGithub />
+                {repositoryLinkLabel} <FiGithub />
               </Link>
             )}
           </div>
@@ -71,14 +72,18 @@ export default function Project({
 
         {/* Image */}
         <div className="relative min-h-[16rem] overflow-hidden bg-gradient-to-br from-indigo-100 to-violet-100 dark:from-indigo-950/40 dark:to-violet-950/40">
-          <Image
-            src={imageUrl}
-            alt={`${title} preview`}
-            quality={95}
-            fill
-            sizes="(max-width: 640px) 100vw, 31rem"
-            className="object-cover object-left-top transition duration-500 group-hover:scale-[1.03]"
-          />
+          {image?.asset && (
+            <Image
+              src={urlFor(image).width(1000).url()}
+              alt={stegaClean(image.alt) ?? ""}
+              quality={95}
+              fill
+              sizes="(max-width: 640px) 100vw, 31rem"
+              placeholder={image.asset.metadata?.lqip ? "blur" : "empty"}
+              blurDataURL={image.asset.metadata?.lqip ?? undefined}
+              className="object-cover object-left-top transition duration-500 group-hover:scale-[1.03]"
+            />
+          )}
           {liveUrl && (
             <Link
               href={liveUrl}

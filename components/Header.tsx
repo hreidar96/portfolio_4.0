@@ -6,12 +6,24 @@ import { links } from "@/lib/data";
 import Link from "next/link";
 import clsx from "clsx";
 import { useActiveSectionContext } from "@/context/active-section-context";
-import { useLanguage } from "@/context/language-context";
+import type { Settings } from "@/sanity/lib/types";
 
-export default function Header() {
+type HeaderProps = {
+  navigation: Settings["navigation"];
+};
+
+// Maps each section to its label field in Site settings → Navigation.
+const navigationKeys = {
+  Home: "home",
+  Services: "services",
+  Work: "work",
+  About: "about",
+  Contact: "contact",
+} as const;
+
+export default function Header({ navigation }: HeaderProps) {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
-  const { t } = useLanguage();
 
   return (
     <header>
@@ -44,7 +56,7 @@ export default function Header() {
                   setTimeOfLastClick(Date.now());
                 }}
               >
-                {t.nav[link.name]}
+                {navigation?.[navigationKeys[link.name]] ?? link.name}
 
                 {link.name === activeSection && (
                   <motion.span

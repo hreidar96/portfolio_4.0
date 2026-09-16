@@ -4,8 +4,8 @@ import React from "react";
 import SectionHeading from "./SectionHeading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
-import { useLanguage } from "@/context/language-context";
-import { skillsData } from "@/lib/data";
+import RichText from "./RichText";
+import type { AboutSection } from "@/sanity/lib/types";
 
 const fadeInAnimationVariants = {
   initial: { opacity: 0, y: 20 },
@@ -16,9 +16,8 @@ const fadeInAnimationVariants = {
   }),
 };
 
-export default function About() {
+export default function About({ section }: { section: AboutSection }) {
   const { ref } = useSectionInView("About");
-  const { t } = useLanguage();
 
   return (
     <motion.section
@@ -30,22 +29,16 @@ export default function About() {
       transition={{ duration: 0.5 }}
       id="about"
     >
-      <SectionHeading>{t.about.heading}</SectionHeading>
-      {t.about.paragraphsHtml.map((html, index) => (
-        <p
-          key={index}
-          className={`[&_strong]:font-medium ${
-            index === t.about.paragraphsHtml.length - 1 ? "mb-8" : "mb-3"
-          }`}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      ))}
+      <SectionHeading>{section.heading}</SectionHeading>
+      <div className="[&_p]:mb-3 [&_p:last-child]:mb-8 [&_strong]:font-medium">
+        <RichText value={section.body} />
+      </div>
 
       <ul className="flex flex-wrap justify-center gap-2 text-base text-gray-800">
-        {skillsData.map((skill, index) => (
+        {section.skills?.map((skill, index) => (
           <motion.li
             className="rounded-full border border-black/10 bg-white/60 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/10 dark:text-white/80"
-            key={index}
+            key={skill}
             variants={fadeInAnimationVariants}
             initial="initial"
             whileInView="animate"
