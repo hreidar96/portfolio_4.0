@@ -4,13 +4,14 @@ import React from "react";
 import SectionHeading from "./SectionHeading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
-import { useLanguage } from "@/context/language-context";
+import RichText from "./RichText";
+import type { ContactSection } from "@/sanity/lib/types";
 import SubmitBtn from "./SubmitBtn";
 import toast from "react-hot-toast";
 
-export default function Contact() {
+export default function Contact({ section }: { section: ContactSection }) {
   const { ref } = useSectionInView("Contact");
-  const { t } = useLanguage();
+  const { form } = section;
 
   const handleSubmit = async (formData: FormData) => {
     const senderEmail = formData.get("senderEmail");
@@ -25,11 +26,11 @@ export default function Contact() {
     const data = await res.json();
 
     if (!res.ok) {
-      toast.error(data.error || t.contact.toastError);
+      toast.error(data.error || form?.errorMessage);
       return;
     }
 
-    toast.success(t.contact.toastSuccess);
+    toast.success(form?.successMessage ?? "");
   };
 
   return (
@@ -50,15 +51,11 @@ export default function Contact() {
         once: true,
       }}
     >
-      <SectionHeading>{t.contact.heading}</SectionHeading>
+      <SectionHeading>{section.heading}</SectionHeading>
 
-      <p className="text-gray-700 -mt-4 dark:text-white/80">
-        {t.contact.textBefore}
-        <a className="underline" href="mailto:contact@hreidarhallgrims.com">
-          contact@hreidarhallgrims.com
-        </a>
-        {t.contact.textAfter}
-      </p>
+      <div className="text-gray-700 -mt-4 dark:text-white/80">
+        <RichText value={section.body} />
+      </div>
 
       <form
         className="mt-10 flex flex-col"
@@ -70,16 +67,16 @@ export default function Contact() {
           type="email"
           required
           maxLength={500}
-          placeholder={t.contact.emailPlaceholder}
+          placeholder={form?.emailPlaceholder ?? undefined}
         />
         <textarea
           className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white/10 dark:focus:bg-white/20 transition-all dark:outline-none dark:text-white"
           name="message"
-          placeholder={t.contact.messagePlaceholder}
+          placeholder={form?.messagePlaceholder ?? undefined}
           required
           maxLength={5000}
         />
-        <SubmitBtn />
+        <SubmitBtn label={form?.submitLabel ?? null} />
       </form>
     </motion.section>
   );

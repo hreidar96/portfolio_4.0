@@ -8,9 +8,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
-        port: "",
-        pathname: "**",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/7mzw821b/**",
       },
     ],
     qualities: [25, 50, 75, 95],

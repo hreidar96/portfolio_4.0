@@ -7,11 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "studio": "npm --prefix studio run dev",
+    "typegen": "npm --prefix studio run typegen"
   },
   "dependencies": {
     "@react-email/components": "1.0.7",
     "@react-email/tailwind": "2.0.4",
+    "@sanity/image-url": "^2.1.1",
     "@types/node": "25.2.3",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
@@ -20,6 +23,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.34.0",
     "next": "^16.3.5",
+    "next-sanity": "^13.3.4",
     "postcss": "^8.5.28",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -27,6 +31,7 @@
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^10.0.2",
     "resend": "^6.9.2",
+    "server-only": "^0.0.1",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3"
   },
