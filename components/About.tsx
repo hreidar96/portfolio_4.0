@@ -4,42 +4,58 @@ import React from "react";
 import SectionHeading from "./SectionHeading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
+import { useLanguage } from "@/context/language-context";
+import { skillsData } from "@/lib/data";
+
+const fadeInAnimationVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.03 * index },
+  }),
+};
 
 export default function About() {
   const { ref } = useSectionInView("About");
+  const { t } = useLanguage();
 
   return (
     <motion.section
       ref={ref}
-      className="mb- max-w-[45rem] text-center leading-8 sm:mb-40 scroll-mt-28"
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.175 }}
+      className="mb-28 max-w-[45rem] scroll-mt-28 text-center leading-8 sm:mb-40"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
       id="about"
     >
-      <SectionHeading> About me</SectionHeading>
-      <p className="mb-3">
-        While pursuing a degree in{" "}
-        <span className="font-medium">Business Administration</span>, I decided
-        to pursue my passion for programming. I studied coding on Codecademy and
-        learned <span className="font-medium">full-stack web development</span>.{" "}
-        <span className="italic">My favorite part of programming</span> is the
-        problem-solving aspect. I <span className="underline">love</span> the
-        feeling of finally figuring out a solution to a problem. My core stack
-        is <span className="font-medium">React, Next.js and Node.js</span>. I am
-        also familiar with TypeScript and Sanity. I am always looking to learn
-        new technologies. I am currently looking for a{" "}
-        <span className="font-medium">full-time position</span> as a software
-        developer.
-      </p>
+      <SectionHeading>{t.about.heading}</SectionHeading>
+      {t.about.paragraphsHtml.map((html, index) => (
+        <p
+          key={index}
+          className={`[&_strong]:font-medium ${
+            index === t.about.paragraphsHtml.length - 1 ? "mb-8" : "mb-3"
+          }`}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ))}
 
-      <p>
-        <span className="italic">When {`I'm`} not coding</span>, I enjoy playing
-        video games, travelling and sports. I also enjoy{" "}
-        <span className="font-medium">learning new things</span>. I am currently
-        learning about <span className="font-medium">customer experience</span>.{" "}
-        {`I'm`} also learning how to play the guitar.
-      </p>
+      <ul className="flex flex-wrap justify-center gap-2 text-base text-gray-800">
+        {skillsData.map((skill, index) => (
+          <motion.li
+            className="rounded-full border border-black/10 bg-white/60 px-4 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/10 dark:text-white/80"
+            key={index}
+            variants={fadeInAnimationVariants}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            custom={index}
+          >
+            {skill}
+          </motion.li>
+        ))}
+      </ul>
     </motion.section>
   );
 }

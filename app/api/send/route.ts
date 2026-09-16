@@ -3,9 +3,10 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import ContactFormEmail from "@/email/contact-form-email";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+  // Instantiate lazily so a missing key doesn't break the build (only requests).
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   const { senderEmail, message } = await request.json();
 
   if (!senderEmail || typeof senderEmail !== "string" || senderEmail.length > 500) {
