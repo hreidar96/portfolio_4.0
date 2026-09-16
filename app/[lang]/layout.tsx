@@ -26,7 +26,8 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
 });
 
-const siteUrl = "https://hreidarhallgrims.com";
+// Canonical origin; the bare domain redirects here.
+const siteUrl = "https://www.hreidarhallgrims.com";
 
 export const dynamicParams = false;
 

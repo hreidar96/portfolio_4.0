@@ -10,7 +10,9 @@ import {SINGLETON_TYPES, structure} from './structure'
 
 // The website the Presentation tool previews. Overridden to localhost in
 // `.env.development` while running `sanity dev`.
-const previewOrigin = process.env.SANITY_STUDIO_PREVIEW_ORIGIN || 'https://hreidarhallgrims.com'
+// The bare domain redirects to www, so preview the www origin directly.
+const previewOrigin =
+  process.env.SANITY_STUDIO_PREVIEW_ORIGIN || 'https://www.hreidarhallgrims.com'
 
 export default defineConfig({
   name: 'default',
@@ -27,7 +29,13 @@ export default defineConfig({
         initial: `${previewOrigin}/${defaultLanguage}`,
         previewMode: {enable: '/api/draft-mode/enable'},
       },
-      allowOrigins: ['http://localhost:*', 'https://hreidarhallgrims.com'],
+      allowOrigins: [
+        'http://localhost:*',
+        'https://www.hreidarhallgrims.com',
+        'https://hreidarhallgrims.com',
+        // Vercel preview deployments
+        'https://portfolio-4-0-*-framar-vefstofa.vercel.app',
+      ],
     }),
     internationalizedArray({
       languages: [...languages],
