@@ -1,14 +1,109 @@
 @import "tailwindcss";
 
+/* Tailwind v4 uses prefers-color-scheme for `dark:` by default. This makes the
+   `dark:` variant follow the `.dark` class toggled by ThemeContext instead. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+}
+
 html {
-  --line-color: #e5e7eb;
+  --line-color: #d8dbe2;
 }
 
 html.dark {
-  --line-color: rgba(255, 255, 255, 0.2);
+  --line-color: rgba(255, 255, 255, 0.14);
+}
+
+.font-display {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
 }
 
 .borderBlack {
   @apply border border-black/10;
   border-color: rgb(0 0 0 / 0.1);
+}
+
+/* ---- Animated aurora background ---- */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(9rem);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+html.dark .aurora-blob {
+  opacity: 0.32;
+}
+
+.aurora-blob--one {
+  top: -12rem;
+  right: -4rem;
+  height: 34rem;
+  width: 34rem;
+  background: #a5b4fc;
+  animation: aurora-float-1 18s ease-in-out infinite alternate;
+}
+
+.aurora-blob--two {
+  top: 8rem;
+  left: -14rem;
+  height: 32rem;
+  width: 42rem;
+  background: #a5f3fc;
+  animation: aurora-float-2 22s ease-in-out infinite alternate;
+}
+
+.aurora-blob--three {
+  top: 40rem;
+  right: 8rem;
+  height: 28rem;
+  width: 28rem;
+  background: #d8b4fe;
+  animation: aurora-float-3 20s ease-in-out infinite alternate;
+}
+
+html.dark .aurora-blob--one {
+  background: #4338ca;
+}
+html.dark .aurora-blob--two {
+  background: #164e63;
+}
+html.dark .aurora-blob--three {
+  background: #6b21a8;
+}
+
+@keyframes aurora-float-1 {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-4rem, 3rem, 0) scale(1.15);
+  }
+}
+
+@keyframes aurora-float-2 {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(5rem, -2rem, 0) scale(1.1);
+  }
+}
+
+@keyframes aurora-float-3 {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-3rem, -4rem, 0) scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none;
+  }
 }
