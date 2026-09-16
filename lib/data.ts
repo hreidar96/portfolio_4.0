@@ -42,7 +42,7 @@ export const projectAssets = [
   {
     tags: ["React", "Next.js", "TypeScript", "OpenAI", "Tailwind"],
     imageUrl: vedurstodinImg,
-    liveUrl: "https://vedurstodin.vercel.app",
+    liveUrl: "https://weather-station-green.vercel.app",
     githubUrl: "https://github.com/hreidar96",
   },
   {
